@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cane Tracker Dashboard</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Material Icons Round (Stable) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- Google Fonts (Outfit) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- HEADER: Android-style Status Bar -->
+        <header class="android-header">
+            <!-- Left: Clock Only -->
+            <div class="header-left">
+                <span id="clock-val" class="clock-text">--:--</span>
+            </div>
+
+            <!-- Center: Title -->
+            <div class="header-center">
+                <h3>Smart Cane Tracker</h3>
+            </div>
+            
+            <!-- Dynamic Island Alert (Mobile Only) -->
+            <div id="dynamic-alert" class="dynamic-island hidden">
+                <div class="island-content">
+                    <span class="material-icons-round icon-alert">personal_injury</span>
+                    <span class="material-icons-round icon-warn">warning</span>
+                </div>
+            </div>
+
+            <!-- Right: Status Icons -->
+            <div class="header-right">
+                <!-- GPS + Satellites -->
+                <div class="status-icon-group">
+                    <span id="satellites-val" class="sat-count">0</span>
+                    <span id="gps-icon" class="material-icons-round">location_disabled</span>
+                </div>
+                <!-- WiFi -->
+                <div class="status-icon-group">
+                    <span id="wifi-icon" class="material-icons-round">wifi_off</span>
+                </div>
+                <!-- Battery -->
+                <div class="status-icon-group">
+                    <span id="battery-icon" class="material-icons-round">battery_unknown</span>
+                    <span id="battery-text" class="status-text">--%</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- (Info Bar Removed) -->
+
+        <!-- MAIN LAYOUT -->
+        <main class="dashboard-grid">
+            <!-- Left: Map + Controls -->
+            <div class="map-section">
+                <div class="map-card">
+                    <div id="map"></div>
+                    
+                    <!-- Floating Focus Button -->
+                    <button id="btn-focus" class="btn-focus">
+                        <span class="material-icons-round">my_location</span>
+                    </button>
+
+                    <!-- Coordinates Overlay (Bottom Left) -->
+                    <div class="map-stats-row">
+                        <div class="info-card">
+                            <span class="material-icons-round icon">place</span>
+                            <div class="info-text">
+                                <span class="label">Location</span>
+                                <span class="value"><span id="lat-val">0.0000</span>, <span id="lng-val">0.0000</span></span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <span class="material-icons-round icon">schedule</span>
+                            <div class="info-text">
+                                <span class="label">Last Update</span>
+                                <span id="timestamp-val" class="value">Waiting...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Actions -->
+                    <!-- (Actions Moved to Sidebar) -->
+                </div>
+                
+            </div>
+
+            <!-- Right: Stats & Battery -->
+            <div class="stats-column">
+                
+                <!-- Hidden Status Divs (Keep for JS logic) -->
+                <div id="connection-status" class="hidden"></div>
+                <div id="system-badge" class="hidden"></div>
+                <div id="gps-status" class="hidden"></div>
+                <div id="wifi-status" class="hidden"></div>
+                <div id="battery-level" class="hidden"></div>
+
+                <!-- 1. Sensor Data Card -->
+                <div id="sensor-card" class="card">
+                    <div class="card-header">
+                        <h2>Sensor Data (Realtime)</h2>
+                    </div>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <span class="label"><span class="material-icons-round icon-sm text-accent">vibration</span> Shock Impact</span>
+                            <span id="shock-val" class="value">0</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label"><span class="material-icons-round icon-sm text-warning">history</span> Last Fall</span>
+                            <span id="last-fall-val" class="value text-warning">None Today</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Tracking Controls -->
+                <div class="sidebar-actions">
+                    <button id="btn-track" class="btn-block btn-track">
+                        <span class="material-icons-round icon">my_location</span> Start Tracking
+                    </button>
+                </div>
+
+                <!-- 3. Status Alert (Bottom) -->
+                <div id="alert-card" class="card alert-card hidden">
+                    <div class="alert-icon"><span class="material-icons-round">warning</span></div>
+                    <div class="alert-content">
+                        <h3>FALL DETECTED!</h3>
+                        <p>Check location immediately.</p>
+                        <button id="btn-dismiss" class="btn-close">✕</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>

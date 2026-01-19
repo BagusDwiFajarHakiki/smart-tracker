@@ -1,0 +1,9 @@
+{
+  "lat": -6.2,
+  "lng": 106.816666,
+  "battery": 85,
+  "wifi": "Connected",
+  "gps": "Locked",
+  "is_fallen": false,
+  "timestamp": "2024-01-01 12:00:00"
+}
