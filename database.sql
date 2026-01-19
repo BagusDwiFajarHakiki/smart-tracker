@@ -6,7 +6,7 @@ USE smart_tracker;
 DROP TABLE IF EXISTS tracker_logs;
 
 CREATE TABLE IF NOT EXISTS tracker_status (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL DEFAULT 1,
   `lat` decimal(10,8) DEFAULT NULL,
   `lng` decimal(11,8) DEFAULT NULL,
   `battery` int(11) DEFAULT NULL,

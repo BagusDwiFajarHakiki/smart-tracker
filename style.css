@@ -707,7 +707,7 @@ header.android-header {
   }
 
   .dynamic-island.active {
-    width: 140px; /* Expanded width */
+    width: 100px; /* Expanded width */
     animation: island-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
