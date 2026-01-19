@@ -125,11 +125,14 @@ void loop() {
     display.display();
 
     if (WiFi.status() == WL_CONNECTED) {
-      kirimTelegramJatuh();
+      // Prioritaskan Web (Cepat/Realtime)
       sendToWeb(batLevel, true, shock); // Update web saat jatuh (kirim shock)
+      
+      // Kirim Telegram (Lambat/HTTPS) setelah Web
+      kirimTelegramJatuh();
     } else {
       Serial.println("WiFi Putus");
-      delay(1000); 
+      delay(100); 
     }
   }
   
