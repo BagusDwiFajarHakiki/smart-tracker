@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS smart_tracker;
 
 USE smart_tracker;
 
--- We don't need logs for this use case, just the CURRENT status
+-- Hapus tabel lama jika ada, agar struktur baru bisa dibuat
 DROP TABLE IF EXISTS tracker_logs;
 
 CREATE TABLE IF NOT EXISTS tracker_status (
@@ -18,3 +18,8 @@ CREATE TABLE IF NOT EXISTS tracker_status (
   `shock_val` int(11) DEFAULT 0,
   `last_fall_time` datetime DEFAULT NULL
 );
+
+INSERT INTO tracker_status 
+(id, lat, lng, battery, wifi_status, gps_status, satellites, is_fallen, shock_val, last_fall_time) 
+VALUES 
+(1, 0, 0, 0, 'Connecting', 'Searching', 0, 0, 0, NULL);
