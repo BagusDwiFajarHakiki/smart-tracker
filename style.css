@@ -56,8 +56,22 @@ header.android-header {
 
 .header-right {
   display: flex;
-  gap: 0.5rem; /* Tighter spacing */
+  gap: 0.5rem;
   align-items: center;
+}
+@media (max-width: 1024px) {
+  .header-right {
+    gap: 2px !important;
+  }
+
+  .status-icon-group {
+    gap: 0px !important;
+  }
+
+  /* Hide battery % unit on mobile */
+  #battery-text .unit {
+    display: none;
+  }
 }
 
 .status-icon-group {
@@ -620,9 +634,9 @@ header.android-header {
 
   /* BUTTONS - FLOATING BOTTOM */
   .sidebar-actions {
-    pointer-events: auto;
+    pointer-events: none; /* Let clicks pass through empty space */
     position: absolute;
-    bottom: 20px; /* Stick to bottom */
+    bottom: 70px; /* Stick to bottom */
     left: 10px;
     width: calc(100% - 20px);
     flex-direction: row; /* Side-by-side */
@@ -630,6 +644,7 @@ header.android-header {
   }
 
   .btn-block {
+    pointer-events: auto; /* Re-enable for buttons */
     flex: 0 0 50%; /* Fixed 50% width like before */
     padding: 1rem;
     font-size: 1rem;
@@ -638,6 +653,21 @@ header.android-header {
     backdrop-filter: blur(4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     border-radius: 12px;
+    -webkit-tap-highlight-color: transparent; /* Remove blue tap box */
+    outline: none;
+  }
+
+  .btn-block:focus,
+  .btn-block:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Disable Hover on Mobile */
+  .btn-block:hover {
+    background: rgba(30, 41, 59, 0.8); /* Reset to default */
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Reset to default */
   }
 
   /* Mobile: Make buttons solid/less transparent */
@@ -717,7 +747,13 @@ header.android-header {
 
   /* FOCUS BUTTON (Mobile) -> Above Buttons (approx 80-90px up) */
   .btn-focus {
-    bottom: 90px;
+    bottom: 70px;
     right: 15px;
+    -webkit-tap-highlight-color: transparent; /* Remove blue tap box */
+    outline: none;
+  }
+  .btn-focus:focus,
+  .btn-focus:active {
+    outline: none;
   }
 }
